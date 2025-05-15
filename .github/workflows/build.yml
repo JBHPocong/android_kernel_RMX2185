@@ -13,7 +13,7 @@ jobs:
   
       - name: install deps Download, extract, and build kernel
         run: |
-         sudo apt install build-essential gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu   python-is-python3 libarchive-tools \
+         sudo apt install build-essential gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu  ccache  python-is-python3 libarchive-tools \
          android-sdk-libsparse-utils device-tree-compiler libncurses-dev
          bash run.sh
         
