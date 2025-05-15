@@ -1,9 +1,7 @@
 name: Run on runner
 
 on:
-  push:
-    paths:
-      - "runner"
+  workflow_dispatch
 
 jobs:
   process-config:
