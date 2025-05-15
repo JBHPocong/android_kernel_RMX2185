@@ -1,0 +1,32 @@
+name: Run on runner
+
+on:
+  push:
+    paths:
+      - "runner"
+
+jobs:
+  process-config:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+  
+      - name: install deps Download, extract, and build kernel
+        run: |
+         sudo apt install build-essential gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu  libtinfo5 python-is-python3 libarchive-tools \
+         android-sdk-libsparse-utils device-tree-compiler libncurses-dev
+         bash run.sh
+        
+
+      - name: Create a new GitHub release and tag
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Release kernel"
+          body: "This release includes the latest build  kernel."
+          files: |
+            out/arch/arm64/boot/bzImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
