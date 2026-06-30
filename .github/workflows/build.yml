@@ -15,19 +15,6 @@ jobs:
         run: |
          sudo apt install build-essential gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu  ccache  python-is-python3 libarchive-tools \
          android-sdk-libsparse-utils device-tree-compiler libncurses-dev wget  clang
+         curl -LSs "https://raw.githubusercontent.com/JBHPocong/KernelSU-Next/legacy/kernel/setup.sh" | bash -s legacy
          bash run.sh
         
-
-      - name: Create a new GitHub release and tag
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: latest
-          name: "Release kernel"
-          body: "This release includes the latest build  kernel."
-          files: |
-            out/arch/arm64/boot/Image.gz
-            out/arch/arm64/boot/dts/mediatek/mt6765.dtb
-            out/arch/arm64/boot/dts/mediatek/oppo6765_206A1.dtbo
-            
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
